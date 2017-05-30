@@ -6,12 +6,34 @@
 
 import React, { Component } from 'react';
 
-import About from './scenes/About'
+import Router from './navigation/router';
+import { StatusBar } from 'react-native';
+import Store from './redux/store';
+import NavigationLayout from './navigation/NavigationLayout'
+
+import { Provider } from 'react-redux'
+
+import {
+  NavigationContext,
+  NavigationProvider,
+  StackNavigation,
+} from '@expo/ex-navigation';
+
+
+const navigationContext = new NavigationContext({
+  router: Router,
+  store: Store,
+})
 
 export default class R10 extends Component {
   render() {
     return (
-        <About />
+      <Provider store={Store}>
+        <NavigationProvider context={navigationContext}>
+          <StatusBar barStyle="light-content" />
+          <StackNavigation initialRoute={Router.getRoute('layout')} />
+        </NavigationProvider>
+      </Provider>
     );
   }
 }

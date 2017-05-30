@@ -13,6 +13,12 @@ class AboutContainer extends Component {
 
     }
 
+    static route = {
+        navigationBar: {
+        title: 'About',
+        }
+    }
+
     constructor () {
         super();
 
@@ -41,7 +47,6 @@ class AboutContainer extends Component {
     }
 
     render () {
-        console.log(this.state.abouts, this.state.isLoading,  "yes")
         if (this.state.isLoading) {
             return (
                 <ActivityIndicator animating={true} size="small" color="black" />
@@ -49,7 +54,7 @@ class AboutContainer extends Component {
             } else {
             return (
                 <About
-                    data={this.state.abouts}
+                    datas={this.state.abouts}
                 />
             );
         }
