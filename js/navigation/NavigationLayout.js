@@ -51,24 +51,26 @@ class NavigationLayout extends Component {
                     />
                 </TabItem>
 
-                {/*<TabItem
+                <TabItem
                     id="schedule"
                     title="Schedule"
-                    renderIcon={(isSelected) => this.renderIcon( 'ios-information-circle', isSelected )}
+                    renderIcon={(isSelected) => this.renderIcon( 'ios-calendar', isSelected)}
+                    renderTitle={this.renderTitle}
                 >
                     <StackNavigation
-                        id="about"
+                        id="schedule"
                         navigatorUID="schedule"
                         initialRoute={Router.getRoute('schedule')}
+                        defaultRouteConfig={defaultRouteConfig}
                     />
-                </TabItem>*/}
+                </TabItem>
 
             </TabNavigation>
         )
     }
 
     renderIcon( iconName, isSelected ) {
-        return <Icon name={"ios-information-circle"} size={24} color={isSelected? colors.white: colors.mediumGrey} />
+        return <Icon name={iconName} size={24} color={isSelected? colors.white: colors.mediumGrey} />
     }
 
     renderTitle( isSelected, title ) {

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import { _fetchConduct } from './../../redux/modules/conduct';
+
 import About from './About';
 
 import {
@@ -29,19 +32,11 @@ class AboutContainer extends Component {
     }
 
     componentDidMount () {
-        let endpoint = 'https://r10app-95fea.firebaseio.com/code_of_conduct.json';
-
-        fetch(endpoint)
-            // if fetch is successful, read our JSON out of the response
-            .then((response) => response.json())
-            .then((result) => {
-                this.setState({ abouts: result });
-            })
-            .catch(error => console.log(`Error fetching JSON: ${error}`));
+        this.props.dispatch(_fetchConduct())
     }
 
     componentDidUpdate () {
-        if ( this.state.abouts.length && this.state.isLoading ) {
+        if ( this.state.abouts && this.state.isLoading ) {
             this.setState({ isLoading: false, });
         }
     }
@@ -54,11 +49,17 @@ class AboutContainer extends Component {
             } else {
             return (
                 <About
-                    datas={this.state.abouts}
+                    datas={this.props.abouts.conductData}
                 />
             );
         }
     }
 }
 
-export default AboutContainer
+function mapStateToProps(state) {
+    return {
+        abouts: state.conduct
+    }
+}
+
+export default connect(mapStateToProps)(AboutContainer);

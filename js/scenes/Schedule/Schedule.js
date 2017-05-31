@@ -1,17 +1,26 @@
 import React from 'react';
-import { Text, View, Image, ScrollView } from 'react-native';
+
+import {
+    Text,
+    View,
+    Image,
+    ListView
+} from 'react-native';
+
 import PropTypes from 'prop-types';
 
 import { styles } from './styles';
 
-import ConductiveItem from './../../components/ConductItem'
-
-const Schedule = ({ datas }) => {
-    // console.log(data)
+const Schedule = ({ sessions }) => {
     return (
-        <View style={styles.container}>
-            <Text>Hello from Schedule</Text>
-        </View>
+        <ListView
+            dataSource={ sessions }
+            renderRow={(data) => (
+                <Text>
+                    {data.title}
+                </Text>
+            )}
+        />
     );
 }
 

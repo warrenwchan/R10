@@ -11,14 +11,16 @@ const About = ({ datas }) => {
     return (
         <View style={styles.container}>
             <ScrollView>
-            <Image source={require('./../../assets/images/r10_logo.png')}/>
-            {datas.map((data) => (
-                <ConductiveItem
-                    key={data.title}
-                    title={data.title}
-                    description={data.description}
-                />
-            ))}
+                <View style={styles.logoContain}>
+                    <Image source={require('./../../assets/images/r10_logo.png')}/>
+                </View>
+                {datas.map((data) => (
+                    <ConductiveItem
+                        key={data.title}
+                        title={data.title}
+                        description={data.description}
+                    />
+                ))}
             </ScrollView>
         </View>
     );
