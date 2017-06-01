@@ -62,4 +62,8 @@ function mapStateToProps(state) {
     }
 }
 
+AboutContainer.propTypes = {
+    abouts: PropTypes.object
+}
+
 export default connect(mapStateToProps)(AboutContainer);

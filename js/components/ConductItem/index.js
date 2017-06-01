@@ -8,13 +8,18 @@ const ConductiveItem = ({ title, description }) => {
     return (
         <View style={styles.itemContain}>
             <Text style={styles.itemTitle}>
-                {title}
+                {`- ${title}`}
             </Text>
             <Text style={styles.itemDesc}>
                 {description}
             </Text>
         </View>
     )
+}
+
+ConductiveItem.propTypes = {
+    title: PropTypes.string,
+    description: PropTypes.string
 }
 
 export default ConductiveItem;

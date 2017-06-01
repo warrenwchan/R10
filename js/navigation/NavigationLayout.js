@@ -4,6 +4,7 @@ import Router from './../navigation/router';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors, fonts } from './../configs/styles';
 import { Text } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import {
   StackNavigation,
@@ -17,9 +18,32 @@ const defaultRouteConfig = {
         titleStyle: {
             fontFamily: fonts.fontMain
         },
-        backgroundColor: colors.red
+        renderBackground: () => (
+            <LinearGradient
+                style={styles.linearGradient}
+                colors={[ '#9963ea', '#cf392a' ]}
+                start={{x: 0.5, y: 0.25}}
+                end={{x: 0.0, y: 1.0}}
+            />
+        )
     }
 }
+
+var styles = ({
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontFamily: 'Gill Sans',
+    textAlign: 'center',
+    margin: 10,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
+  },
+});
 
 class NavigationLayout extends Component {
     static route = {
