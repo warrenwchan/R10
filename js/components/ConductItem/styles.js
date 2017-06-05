@@ -5,8 +5,9 @@ export const styles = StyleSheet.create({
     itemContain: {
     },
     itemTitle: {
-        color: 'purple',
-        fontSize: 12,
+        color: colors.purple,
+        fontSize: 14,
+        fontWeight: 'bold',
         paddingBottom: 10
     },
     itemDesc: {
@@ -14,5 +15,10 @@ export const styles = StyleSheet.create({
         fontFamily: fonts.fontMainLight,
         paddingBottom: 10
     },
-
+    infoButton: {
+        marginRight: 10
+    },
+    infoClosed: {
+        height: 0,
+    },
 });

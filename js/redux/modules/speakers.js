@@ -1,5 +1,5 @@
 import { firebaseUrl } from '../../configs/api';
-import { formatSpeakerInfo } from './../../lib/dataFormatHelpers';
+import { formatDataObject } from './../../lib/dataFormatHelpers';
 
 // ACTIONS
 const GET_SPEAKERS_LOADING = 'GET_SPEAKERS_LOADING';
@@ -14,7 +14,7 @@ const getSpeakers = (speakerInfo) => ({ type: GET_SPEAKERS, payload: speakerInfo
 export const _fetchSpeakers = ( speakerId ) => (dispatch) => {
     dispatch(getSpeakersLoading());
 
-    return fetch(`${firebaseUrl}/speakers.json?orderBy="speaker_Id"&equalTo="${speakerId}"`)
+    return fetch(`${firebaseUrl}/speakers.json?orderBy="speaker_id"&equalTo="${speakerId}"`)
         .then(response => response.json())
         .then(speakerInfo => dispatch(getSpeakers(speakerInfo)))
         .catch(error => dispatch(getSpeakersError(error)))
@@ -23,7 +23,7 @@ export const _fetchSpeakers = ( speakerId ) => (dispatch) => {
 // REDUCER
 export default function reducer( state = {
     isLoading: false,
-    speakersInfo: {}
+    speakerInfo: {}
 }, action ) {
     switch (action.type) {
         case GET_SPEAKERS_LOADING: {
@@ -39,11 +39,11 @@ export default function reducer( state = {
             })
         }
         case GET_SPEAKERS: {
-            const formattedSpeakerInfo = formatSpeakerInfo( action.payload )
+            const formattedSpeakerInfo = formatDataObject( action.payload )
             return Object.assign({}, state, {
                 isLoading: false,
                 error: '',
-                speakersInfo: formattedSpeakerInfo
+                speakerInfo: formattedSpeakerInfo
             })
         }
         default: {

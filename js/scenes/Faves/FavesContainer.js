@@ -2,25 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { _fetchsessions } from './../../redux/modules/sessions';
+import { _fetchFaves } from './../../redux/modules/faves';
 
-import Schedule from './Schedule';
+import Faves from './Faves';
 
 import {
   ActivityIndicator,
   ListView
 } from 'react-native';
 
-class ScheduleContainer extends Component {
+class FavesContainer extends Component {
 
     static route = {
         navigationBar: {
-        title: 'Schedule',
+        title: 'Faves',
         }
     }
 
     componentDidMount () {
-        this.props.fetchSessions()
+        this.props.fetchFaves()
     }
 
     render () {
@@ -30,8 +30,8 @@ class ScheduleContainer extends Component {
             );
             } else {
             return (
-                <Schedule
-                    sessions={this.props.dataSource}
+                <Faves
+                    faves={this.props.dataSource}
                 />
             );
         }
@@ -46,20 +46,27 @@ const ds = new ListView.DataSource({
 function mapStateToProps(state) {
     return {
         dataSource: ds.cloneWithRowsAndSections(
-            state.sessions.sessionsData.dataBlob,
-            state.sessions.sessionsData.sectionIds,
-            state.sessions.sessionsData.rowIds
+            state.faves.favesData.dataBlob,
+            state.faves.favesData.sectionIds,
+            state.faves.favesData.rowIds
         ),
-        isLoading: state.sessions.isloading
+        isLoading: state.faves.isloading
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchSessions () {
-            dispatch(_fetchsessions())
+        fetchFaves () {
+
+            dispatch(_fetchFaves())
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScheduleContainer);
+FavesContainer.propTypes = {
+    dataSource: PropTypes.object,
+    fetchFaves: PropTypes.func,
+    isLoading: PropTypes.object,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavesContainer);

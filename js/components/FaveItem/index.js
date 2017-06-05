@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { styles } from './styles';
 
-class ScheduleItem extends Component {
+class FaveScheduleItem extends Component {
     constructor() {
         super();
 
@@ -17,11 +17,11 @@ class ScheduleItem extends Component {
     render() {
         return (
             <TouchableHighlight onPress={() => goToSession( this.props.currentNavigatorUID, this.props.rowData )}>
-            <View style={styles.scheduleItem}>
-                <Text style={styles.scheduleTitle}>
+            <View style={styles.faveScheduleItem}>
+                <Text style={styles.faveScheduleTitle}>
                     {this.props.rowData.title}
                 </Text>
-                <View style={styles.scheduleLocation}>
+                <View style={styles.faveScheduleLocation}>
                     <Text>{this.props.rowData.location}</Text>
                     <Icon name={Platform.OS === 'ios'? 'ios-heart': 'md-heart'} size={14} />
                 </View>
@@ -31,9 +31,9 @@ class ScheduleItem extends Component {
     }
 }
 
-ScheduleItem.propTypes = {
+FaveScheduleItem.propTypes = {
     rowData: PropTypes.object,
     currentNavigatorUID: PropTypes.string
 };
 
-export default ScheduleItem;
+export default FaveScheduleItem;

@@ -2,25 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { styles } from './styles';
 
-import ScheduleItem from './../../components/ScheduleItem'
+import FaveScheduleItem from './../../components/FaveItem'
 
 import { ListView, View } from 'react-native';
 
-const Schedule = ({ sessions }) => {
+const Faves = ({ faves }) => {
     return (
         <ListView
-            dataSource={ sessions }
+            dataSource={ faves }
             renderRow={(rowData) => (
                 <View style={styles.container}>
-                    <ScheduleItem rowData={rowData} currentNavigatorUID='schedule'/>
+                    <FaveScheduleItem rowData={rowData} currentNavigatorUID='schedule'/>
                 </View>
             )}
         />
     );
 }
 
-Schedule.propTypes = {
-    sessions: PropTypes.object
+Faves.propTypes = {
+    faves: PropTypes.object
 };
 
-export default Schedule;
+export default Faves;

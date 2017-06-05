@@ -7,7 +7,6 @@ const Fave = {
         id: 'string',
         faved_on: 'date'
     }
-
 }
 
 const realm = new Realm({schema: [ Fave ]});

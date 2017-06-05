@@ -1,17 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    scheduleItem: {
+    favesScheduleItem: {
         width: '100%',
         height: 60,
     },
-    scheduleTitle: {
+    faveScheduleTitle: {
         width: '100%',
         fontSize: 15,
         fontWeight: 'bold',
         paddingBottom: 10,
     },
-    scheduleLocation: {
+    faveScheduleLocation: {
         width: '100%',
         display: 'flex',
         flexDirection: 'row',

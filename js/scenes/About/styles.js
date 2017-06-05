@@ -4,13 +4,16 @@ import { fonts } from './../../configs/styles';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
+        padding: 20,
         backgroundColor: '#ffffff',
     },
     logoContain: {
         flex: 1,
         alignItems: 'center',
-        padding: 20
+        padding: 20,
+        borderBottomColor: '#bbb',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        marginBottom: 20,
     },
     heading: {
         paddingBottom: 10

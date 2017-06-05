@@ -13,18 +13,14 @@ import {
 
 class SessionContainer extends Component {
 
-    static propTypes = {
-
-    }
-
     static route = {
         navigationBar: {
-        title: 'Speakers',
+        title: 'Sessions',
         }
     }
 
     componentDidMount () {
-        this.props.fetchSpeakers()
+        this.props.fetchSpeakers(this.props.sessionData.speaker)
     }
 
     render () {
@@ -35,35 +31,30 @@ class SessionContainer extends Component {
             } else {
             return (
                 <Session
-                    speaker={this.props.dataSource}
+                    session = {this.props.sessionData}
+                    speaker = {this.props.speakers}
                 />
             );
         }
     }
 }
 
-const ds = new ListView.DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-    sectionHeaderHasChanged: (s1, s2) => s1 !== s2
-});
-
 function mapStateToProps(state) {
     return {
-        dataSource: ds.cloneWithRowsAndSections(
-            state.Speakers.sessionsData.dataBlob,
-            state.Speakers.sessionsData.sectionIds,
-            state.Speakers.sessionsData.rowIds
-        ),
-        isLoading: state.Speakers.isloading
+        speakers: state.speakers.speakerInfo
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchSpeakers ( speakerId) {
+        fetchSpeakers ( speakerId ) {
             dispatch(_fetchSpeakers( speakerId ))
         }
     }
+}
+
+SessionContainer.PropTypes = {
+    speakers: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionContainer);

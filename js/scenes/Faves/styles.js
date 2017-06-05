@@ -1,8 +1,9 @@
 import { StyleSheet } from  'react-native';
+import { fonts } from './../../configs/styles';
 
 export const styles = StyleSheet.create({
-    container: {
+    contain: {
         flex: 1,
-        padding: 15,
+        padding:20,
     }
 });
