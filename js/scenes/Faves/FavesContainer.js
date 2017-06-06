@@ -7,8 +7,9 @@ import { _fetchFaves } from './../../redux/modules/faves';
 import Faves from './Faves';
 
 import {
-  ActivityIndicator,
-  ListView
+    View,
+    ActivityIndicator,
+    ListView
 } from 'react-native';
 
 class FavesContainer extends Component {
@@ -23,7 +24,12 @@ class FavesContainer extends Component {
         this.props.fetchFaves()
     }
 
+    // renderFaved () {
+
+    // }
+
     render () {
+        console.log(this.props)
         if (this.props.isLoading) {
             return (
                 <ActivityIndicator animating={true} size="small" color="black" />
@@ -31,7 +37,7 @@ class FavesContainer extends Component {
             } else {
             return (
                 <Faves
-                    faves={this.props.dataSource}
+                    faves={ this.props.dataSource }
                 />
             );
         }

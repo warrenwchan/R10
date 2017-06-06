@@ -56,12 +56,18 @@ export const styles = StyleSheet.create({
         marginBottom: 20
     },
     faveButton: {
+        margin: 20,
+        alignItems: 'center',
     },
     buttonTitle: {
+        color: colors.white
     },
     linearGradient: {
-        height: 50,
+        padding:10,
+        backgroundColor: 'transparent',
         width: '80%',
+        alignItems: 'center',
+        borderRadius: 15,
     }
 });
 

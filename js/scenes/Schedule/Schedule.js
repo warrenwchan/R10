@@ -12,7 +12,9 @@ const Schedule = ({ sessions }) => {
             dataSource={ sessions }
             renderRow={(rowData) => (
                 <View style={styles.container}>
-                    <ScheduleItem rowData={rowData} currentNavigatorUID='schedule'/>
+                    <ScheduleItem
+                        rowData={rowData}
+                        currentNavigatorUID='schedule'/>
                 </View>
             )}
         />

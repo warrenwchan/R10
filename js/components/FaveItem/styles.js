@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
+import { colors } from './../../configs/styles';
 
 export const styles = StyleSheet.create({
-    favesScheduleItem: {
+    faveScheduleItem: {
         width: '100%',
         height: 60,
     },
@@ -17,5 +18,8 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+    },
+    heart: {
+        color: colors.red,
     }
 })

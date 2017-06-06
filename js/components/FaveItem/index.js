@@ -16,14 +16,14 @@ class FaveScheduleItem extends Component {
     }
     render() {
         return (
-            <TouchableHighlight onPress={() => goToSession( this.props.currentNavigatorUID, this.props.rowData )}>
+        <TouchableHighlight onPress={() => goToSession( this.props.currentNavigatorUID, this.props.rowData )}>
             <View style={styles.faveScheduleItem}>
                 <Text style={styles.faveScheduleTitle}>
                     {this.props.rowData.title}
                 </Text>
                 <View style={styles.faveScheduleLocation}>
                     <Text>{this.props.rowData.location}</Text>
-                    <Icon name={Platform.OS === 'ios'? 'ios-heart': 'md-heart'} size={14} />
+                    <Icon style={styles.heart}name={Platform.OS === 'ios'? 'ios-heart': 'md-heart'} size={14} />
                 </View>
             </View>
         </TouchableHighlight>

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { _fetchsessions } from './../../redux/modules/sessions';
+import { _fetchFaves } from './../../redux/modules/faves';
+import realm from './../../configs/models';
 
 import Schedule from './Schedule';
 
@@ -12,6 +14,14 @@ import {
 } from 'react-native';
 
 class ScheduleContainer extends Component {
+    constructor() {
+        super();
+
+        realm.addListener('change', () => {
+            this.props.fetchSessions()
+            this.props.fetchFaves()
+        })
+    }
 
     static route = {
         navigationBar: {
@@ -21,6 +31,8 @@ class ScheduleContainer extends Component {
 
     componentDidMount () {
         this.props.fetchSessions()
+        this.props.fetchFaves()
+
     }
 
     render () {
@@ -50,7 +62,8 @@ function mapStateToProps(state) {
             state.sessions.sessionsData.sectionIds,
             state.sessions.sessionsData.rowIds
         ),
-        isLoading: state.sessions.isloading
+        isLoading: state.sessions.isloading,
+        favedIds: state.faves.favedIds
     }
 }
 
@@ -58,6 +71,9 @@ function mapDispatchToProps(dispatch) {
     return {
         fetchSessions () {
             dispatch(_fetchsessions())
+        },
+        fetchFaves () {
+            dispatch(_fetchFaves())
         }
     }
 }

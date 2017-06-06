@@ -35,7 +35,7 @@ class SessionContainer extends Component {
     }
 
     render () {
-        console.log(queryFaves)
+        console.log(favedIds)
         if (this.props.isLoading) {
             return (
                 <ActivityIndicator animating={true} size="small" color="black" />

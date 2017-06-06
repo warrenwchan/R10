@@ -1,5 +1,6 @@
 import { firebaseUrl } from '../../configs/api';
 import { formatFavesData } from './../../lib/dataFormatHelpers';
+import { queryFaves } from './../../configs/models';
 
 // ACTIONS
 const GET_FAVES_LOADING = 'GET_Faves_LOADING';
@@ -9,14 +10,20 @@ const GET_FAVES = 'GET_Faves';
 // ACTION CREATORS
 const getFavesLoading = () => ({ type: GET_FAVES_LOADING });
 const getFavesError = (error) => ({ type: GET_FAVES_ERROR, payload: error });
-const getFaves = (codes) => ({ type: GET_FAVES, payload: codes })
+const getFaves = (favedSessions, faveIds) => ({ type: GET_FAVES, payload:{favedSessions: favedSessions, faveIds: faveIds}  })
 
 export const _fetchFaves = () => (dispatch) => {
+    const faveIds = queryFaves();
     dispatch(getFavesLoading());
 
     return fetch(`${firebaseUrl}/sessions.json`)
         .then(response => response.json())
-        .then(Faves => dispatch(getFaves(Faves)))
+        .then( sessions => sessions.filter( session => {
+            if( faveIds.includes(session.session_id)){
+                return session
+            }
+        }))
+        .then(filteredSessions => dispatch(getFaves(filteredSessions, faveIds)))
         .catch(error => dispatch(getFavesError(error)))
 };
 
@@ -43,11 +50,13 @@ export default function reducer( state = {
             })
         }
         case GET_FAVES: {
-            const formattedData = formatFavesData( action.payload );
+            const formattedData = formatFavesData( action.payload.favedSessions );
+            console.log(action.payload, 'favsReducer')
             return Object.assign({}, state, {
                 isLoading: false,
                 error: '',
-                favesData: formattedData
+                favesData: formattedData,
+                faveIds: action.payload.faveIds
             })
         }
         default: {
