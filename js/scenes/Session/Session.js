@@ -1,47 +1,43 @@
 import React, { Component } from 'react';
 import { styles } from './styles';
 import PropTypes from 'prop-types';
+
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
-import queryFaves from './../../configs/models';
-import { createFaves } from './../../configs/models';
+
+import LinearGradient from 'react-native-linear-gradient';
 
 import {
     Text,
     View,
     Image,
-    Button,
     Platform,
+    TouchableOpacity
 } from 'react-native';
 
 class Session extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            faved: false
-        }
-    }
 
     favedCheck (favedId) {
-        this.setState({
-            faved: !this.state.faved
-        })
-        console.log(favedId)
+        return this.props.favedIds.includes(favedId) ? this.props.deleteFaves(favedId) : this.props.addFaves(favedId)
+        console.log(this.props.favedIds)
     }
 
-    toggleFave () {
-        if (this.state.faved) {
-            return <Icon style={styles.heart} name={Platform.OS === 'ios'? 'ios-heart': 'md-heart'} size={14} />
-        }
+    toggleFave (favedId) {
+        return this.props.favedIds.includes(favedId) && <Icon style={styles.heart} name={Platform.OS === 'ios'? 'ios-heart': 'md-heart'} size={14} />
+    }
+
+    buttonTitle(favedId) {
+        return this.props.favedIds.includes(favedId) ? `Remove from favorites` : `Add to favorites`
     }
 
     render() {
+        console.log(this.props.session.session_id)
+        console.log(this.props.favedIds)
         return (
             <View style={styles.sessionContain}>
                 <View style={styles.sessionHeading}>
                     <Text style={styles.sessionGreyText}>{this.props.session.location}</Text>
-                    {this.toggleFave()}
+                    {this.toggleFave(this.props.session.session_id)}
                 </View>
                 <Text style={styles.sessionTitle}>{this.props.session.title}</Text>
                 <Text style={styles.sessionTime}>{moment(this.props.session.start_time).format('LT')}</Text>
@@ -54,14 +50,16 @@ class Session extends Component {
                     />
                     <Text style={styles.sessionSpeakerName}>{this.props.speaker.name}</Text>
                 </View>
-                <Button
-                    style={styles.favButton}
-                    onPress={() => (this.favedCheck(this.props.session.session_id))}
-                    title="Add to favorites"
-                    color="#841584"
-                    accessibilityLabel="Learn more about this purple button"
-                />
-
+                <TouchableOpacity style={styles.faveButton} onPress={() => (this.favedCheck(this.props.session.session_id))}>
+                    <LinearGradient
+                        style={styles.linearGradient}
+                        colors={[ '#9963ea', '#cf392a' ]}
+                        start={{x: 0.5, y: 0.25}}
+                        end={{x: 0.0, y: 1.0}}
+                    >
+                        <Text style={styles.buttonTitle}>{this.buttonTitle(this.props.session.session_id)}</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -70,6 +68,7 @@ class Session extends Component {
 Session.propTypes = {
     session: PropTypes.object,
     speaker: PropTypes.object,
+    favedIds: PropTypes.array,
 };
 
 export default Session;

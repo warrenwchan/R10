@@ -55,10 +55,13 @@ export const styles = StyleSheet.create({
         borderRadius: 25,
         marginBottom: 20
     },
-    favButton: {
-        backgroundColor: colors.blue,
-        width: 200,
-        height: 50
+    faveButton: {
+    },
+    buttonTitle: {
+    },
+    linearGradient: {
+        height: 50,
+        width: '80%',
     }
 });
 
